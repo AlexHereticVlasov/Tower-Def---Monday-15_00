@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac569fc3033e2ab4fb2b8e252fe31e2d, type: 3}
+  m_Name: Stream 01
+  m_EditorClassIdentifier: 
+  _waves:
+  - {fileID: 11400000, guid: 5fe956962f0b2ea4a8ff04587be26310, type: 2}
+  - {fileID: 11400000, guid: bb352931bcaa1b8438b6ccf1b7ce60b7, type: 2}
+  - {fileID: 11400000, guid: 931a25afc1d757d47a613134912f7323, type: 2}
+  - {fileID: 11400000, guid: 4af5a9b8f22d4b6498bbb59538dbcd4e, type: 2}
+  _timeBetweenWaves: 1
