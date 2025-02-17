@@ -1,13 +1,18 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, ISelectable
 {
     [SerializeField] private EnemyMovement _movement;
-    [SerializeField] private Health _health;
+    [SerializeField] private Stats _health;
 
     public event UnityAction<Enemy> Died;
     public event UnityAction<Enemy> ReachedTarget;
+    public event UnityAction Selected;
+    public event UnityAction Deselected;
+    public event UnityAction ValuesChanged;
+
+    public IStatsReadOnly Stats => _health;
 
     public void Init(Path path)
     {
@@ -24,7 +29,7 @@ public class Enemy : MonoBehaviour
         _health.Died -= OnDied;
     }
 
-    private void OnDied()
+    private void OnDied(IStatsReadOnly stats)
     {
         Died?.Invoke(this);
         Destroy(gameObject);
@@ -41,5 +46,15 @@ public class Enemy : MonoBehaviour
 
         Destroy(gameObject);
         Debug.Log("Enemy Reachedd Target");
+    }
+
+    public void Select()
+    {
+        Selected?.Invoke();
+    }
+
+    public void Deselect()
+    {
+        Deselected?.Invoke();
     }
 }

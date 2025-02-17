@@ -1,13 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class TrapBase : MonoBehaviour
+public class TrapBase : MonoBehaviour, ISelectable
 {
     private List<Enemy> _enemies = new();
     private int _chargeAmount;
 
     private Coroutine _damageRoutine;
+
+    public event UnityAction Selected;
+    public event UnityAction Deselected;
+    public event UnityAction ValuesChanged;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -49,5 +54,15 @@ public class TrapBase : MonoBehaviour
 
             yield return new WaitForSeconds(1);
         }
+    }
+
+    public void Select()
+    {
+        Selected?.Invoke();
+    }
+
+    public void Deselect()
+    {
+        Deselected?.Invoke();
     }
 }
