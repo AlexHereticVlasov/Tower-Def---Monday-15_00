@@ -16,6 +16,11 @@ public class UserInput : MonoBehaviour
 
             _selection.GetSelectableUnderPointer();
         }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            //
+        }
     }
 }
 

@@ -4,7 +4,7 @@ public class SelectionMediator : MonoBehaviour
 {
     [SerializeField] private Selection _selection;
 
-    [SerializeField] private InfoPanelBase[] _panels;  
+    [SerializeField] private InfoPanelBase[] _panels;
 
     private void OnEnable()
     {
@@ -23,18 +23,26 @@ public class SelectionMediator : MonoBehaviour
             for (int i = 0; i < _panels.Length; i++)
             {
                 _panels[i].gameObject.SetActive(i == 0);
-                _panels[0].Init(enemy);
-                enemy.Died += OnDied;
-                enemy.ReachedTarget += OnReachedTarget;
             }
+            _panels[0].Init(enemy);
+            enemy.Died += OnDied;
+            enemy.ReachedTarget += OnReachedTarget;
         }
         else if (selectable is TrapBase trap)
         {
             for (int i = 0; i < _panels.Length; i++)
             {
                 _panels[i].gameObject.SetActive(i == 1);
-                _panels[1].Init(trap);
             }
+            _panels[1].Init(trap);
+        }
+        else if (selectable is TowerNode towerNode)
+        {
+            for (int i = 0; i < _panels.Length; i++)
+            {
+                _panels[i].gameObject.SetActive(i == 2);
+            }
+            _panels[2].Init(towerNode);
         }
     }
 

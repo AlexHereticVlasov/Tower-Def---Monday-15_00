@@ -3,7 +3,7 @@
 public abstract class BulletBase : MonoBehaviour
 {
     [SerializeField] private float _speed = 5;
-    [SerializeField] private float _damage = 5;
+    [field: SerializeField] public float Damage { get; private set; } =  5;
 
     private Enemy _enemy;
 
@@ -29,7 +29,10 @@ public abstract class BulletBase : MonoBehaviour
     {
         if (other.TryGetComponent(out Enemy enemy))
         {
-            enemy.TakeDamage(_damage);
+            //enemy.TakeDamage(_damage);
+            Apply(enemy);
         }
     }
+
+    protected abstract void Apply(Enemy enemy);
 }
