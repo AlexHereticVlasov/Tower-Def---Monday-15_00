@@ -1,40 +1,42 @@
 ﻿using System;
 using UnityEngine;
 
-public sealed class InfoPanelTowerNode : InfoPanelBase
+namespace UI
 {
-    private TowerNode _node;
-
-    public override void Init(ISelectable selectable)
+    public sealed class InfoPanelTowerNode : InfoPanelBase
     {
-        if (selectable is TowerNode towerNode)
-        {
-            _node = towerNode;
-        }
-    }
+        private TowerNode _node;
 
-    public void TryBuildTower(BuilingBase builing)
-    {
-        //ToDo: Validate
-        if (CanBuild(_node, builing))
+        public override void Init(ISelectable selectable)
         {
-            _node.Build(builing);
+            if (selectable is TowerNode towerNode)
+            {
+                _node = towerNode;
+            }
         }
-    }
 
-    private bool CanBuild(TowerNode node, BuilingBase builing)
-    {
-        if (builing is null)
-            throw new Exception("Building is nit set");
-
-        if (node.IsEmpty == false)
+        public void TryBuildTower(BuilingBase builing)
         {
-            return false;
+            //ToDo: Validate
+            if (CanBuild(_node, builing))
+            {
+                _node.Build(builing);
+            }
         }
-        
-        return true;
+
+        private bool CanBuild(TowerNode node, BuilingBase builing)
+        {
+            if (builing is null)
+                throw new Exception("Building is nit set");
+
+            if (node.IsEmpty == false)
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }
-
 public abstract class BuilingBase : MonoBehaviour
 { }

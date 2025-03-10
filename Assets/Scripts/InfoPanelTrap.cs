@@ -1,10 +1,13 @@
-﻿public sealed class InfoPanelTrap : InfoPanelBase
+﻿namespace UI
 {
-    public override void Init(ISelectable selectable)
+    public sealed class InfoPanelTrap : InfoPanelBase
     {
-        if (selectable is TrapBase trap)
+        public override void Init(ISelectable selectable)
         {
-
+            if (selectable is ITrapReadOnly trap)
+            {
+                //_damageText.text = trap.Damage;
+            }
         }
     }
 }

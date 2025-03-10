@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class TrapBase : MonoBehaviour, ISelectable
+public class TrapBase : MonoBehaviour, ISelectable, ITrapReadOnly
 {
     private List<Enemy> _enemies = new();
     private int _chargeAmount;
+    private int _damageAmount = 10;
 
     private Coroutine _damageRoutine;
+
+    public int Damage => _damageAmount;
 
     public event UnityAction Selected;
     public event UnityAction Deselected;
@@ -50,7 +53,7 @@ public class TrapBase : MonoBehaviour, ISelectable
         while (true)
         {
             for (int i = _enemies.Count - 1; i >= 0; i--)
-                _enemies[i].TakeDamage(10);
+                _enemies[i].TakeDamage(_damageAmount);
 
             yield return new WaitForSeconds(1);
         }
@@ -65,4 +68,9 @@ public class TrapBase : MonoBehaviour, ISelectable
     {
         Deselected?.Invoke();
     }
+}
+
+public interface ITrapReadOnly
+{ 
+    int Damage { get; }
 }

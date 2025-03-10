@@ -1,16 +1,35 @@
-﻿public sealed class InfoPanelEnemy : InfoPanelBase
-{
-    public override void Init(ISelectable selectable)
-    {
-        if (selectable is Enemy enemy)
-        {
-            enemy.Stats.ValueChanged += OnValueChanged;
-            OnValueChanged(enemy.Stats);
-        }
-    }
+﻿using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
-    private void OnValueChanged(IStatsReadOnly stats)
+namespace UI
+{
+    public sealed class InfoPanelEnemy : InfoPanelBase
     {
-        //ToDo: UI
+        [SerializeField] private TMP_Text _nameText;
+        [SerializeField] private Image _image;
+        [SerializeField] private Slider _healthBar;
+        [SerializeField] private TMP_Text _healthText;
+
+        public override void Init(ISelectable selectable)
+        {
+            if (selectable is Enemy enemy)
+            {
+                enemy.Stats.ValueChanged += OnValueChanged;
+
+                //TODO: Get Enemy Data
+                //_nameText.text = ;
+                //_image
+
+                OnValueChanged(enemy.Stats);
+            }
+        }
+
+        private void OnValueChanged(IStatsReadOnly stats)
+        {
+            //ToDo: UI
+            _healthBar.value = stats.GetNormilizeHealth();
+            _healthText.text = $"{stats.GetHealth()} / {stats.GetMaxHealth()}";
+        }
     }
 }

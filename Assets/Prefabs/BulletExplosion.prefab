@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 5
-  <Damage>k__BackingField: 5
+  <Damage>k__BackingField: 1
   _radius: 5
   _mask:
     serializedVersion: 2
