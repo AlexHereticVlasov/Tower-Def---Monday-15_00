@@ -29,7 +29,7 @@ namespace UI
         {
             //ToDo: UI
             _healthBar.value = stats.GetNormilizeHealth();
-            _healthText.text = $"{stats.GetHealth()} / {stats.GetMaxHealth()}";
+            _healthText.text = $"{stats.GetHealth():F2} / {stats.GetMaxHealth():F2}";
         }
     }
 }

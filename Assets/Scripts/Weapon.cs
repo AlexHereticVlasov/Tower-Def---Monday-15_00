@@ -34,10 +34,10 @@ public class Weapon : MonoBehaviour
 
     private void Shoot()
     {
-        if (_detector.TryGetEnemy(out Enemy enemy))
+        if (_detector.TryGetEnemy(out IEffectRecepient enemy))
         {
             var bullet = Instantiate(_bullet, transform.position, Quaternion.identity);
-            bullet.Init(enemy);
+            bullet.Init(enemy.Transform);
             _time = _rate;
         }
     }

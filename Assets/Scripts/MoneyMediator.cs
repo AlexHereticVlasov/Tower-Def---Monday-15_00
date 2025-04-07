@@ -1,9 +1,10 @@
 ﻿
 using UnityEngine;
+using Zenject;
 
 public sealed class MoneyMediator : MonoBehaviour
 {
-    [SerializeField] private StorageBase _storage;
+    [Inject] private readonly StorageBase _storage;
     [SerializeField] private Spawner[] _spawners;
 
     private void OnEnable()
@@ -16,7 +17,7 @@ public sealed class MoneyMediator : MonoBehaviour
 
     private void Start()
     {
-        _storage.Init(199);
+        _storage.Init(349);
     }
 
     private void OnDisable()

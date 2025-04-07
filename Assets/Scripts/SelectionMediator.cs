@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using UI;
+using Zenject;
 
 public class SelectionMediator : MonoBehaviour
 {
-    [SerializeField] private Selection _selection;
+    [Inject] private readonly ISelection _selection;
 
     [SerializeField] private InfoPanelBase[] _panels;
 

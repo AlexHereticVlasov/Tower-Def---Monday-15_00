@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -24,8 +21,8 @@ public class TowerNode : MonoBehaviour, ISelectable
         Selected?.Invoke();
     }
 
-    internal void Build(BuilingBase builing)
+    public void Build(BuildingData data)
     {
-        _builing = Instantiate(builing, transform.position, Quaternion.identity, transform);
+        _builing = Instantiate(data.Template, transform.position, Quaternion.identity, transform);
     }
 }

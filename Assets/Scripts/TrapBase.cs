@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class TrapBase : MonoBehaviour, ISelectable, ITrapReadOnly
 {
-    private List<Enemy> _enemies = new();
+    private readonly List<IEffectRecepient> _enemies = new();
     private int _chargeAmount;
     private int _damageAmount = 10;
 
@@ -19,7 +19,7 @@ public class TrapBase : MonoBehaviour, ISelectable, ITrapReadOnly
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out Enemy enemy))
+        if (other.TryGetComponent(out IEffectRecepient enemy))
         {
             _enemies.Add(enemy);
             enemy.Died += OnDied;
@@ -31,13 +31,13 @@ public class TrapBase : MonoBehaviour, ISelectable, ITrapReadOnly
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.TryGetComponent(out Enemy enemy))
+        if (other.TryGetComponent(out IEffectRecepient enemy))
             HandleEnemyExit(enemy);
     }
 
-    private void OnDied(Enemy enemy) => HandleEnemyExit(enemy);
+    private void OnDied(IEffectRecepient enemy) => HandleEnemyExit(enemy);
 
-    private void HandleEnemyExit(Enemy enemy)
+    private void HandleEnemyExit(IEffectRecepient enemy)
     {
         _enemies.Remove(enemy);
         enemy.Died -= OnDied;

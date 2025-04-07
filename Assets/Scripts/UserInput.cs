@@ -1,12 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using Zenject;
 
 public class UserInput : MonoBehaviour
 {
-    [SerializeField] private Selection _selection;
+    [Inject] private readonly ISelection _selection;
 
     private void Update()
     {

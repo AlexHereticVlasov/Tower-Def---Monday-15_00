@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 
-public class Selection : MonoBehaviour
+public class Selection : MonoBehaviour, ISelection
 {
     [SerializeField] private LayerMask _mask;
 
@@ -26,4 +26,10 @@ public class Selection : MonoBehaviour
             }
         }
     }
+}
+
+public interface ISelection
+{
+    event UnityAction<ISelectable> SelectableChanged;
+    void GetSelectableUnderPointer();
 }

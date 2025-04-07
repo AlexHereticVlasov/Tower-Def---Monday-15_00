@@ -5,38 +5,17 @@ namespace UI
 {
     public sealed class InfoPanelTowerNode : InfoPanelBase
     {
-        private TowerNode _node;
+        public TowerNode Node { get; private set; }
 
         public override void Init(ISelectable selectable)
         {
             if (selectable is TowerNode towerNode)
             {
-                _node = towerNode;
+                Node = towerNode;
             }
-        }
-
-        public void TryBuildTower(BuilingBase builing)
-        {
-            //ToDo: Validate
-            if (CanBuild(_node, builing))
-            {
-                _node.Build(builing);
-            }
-        }
-
-        private bool CanBuild(TowerNode node, BuilingBase builing)
-        {
-            if (builing is null)
-                throw new Exception("Building is nit set");
-
-            if (node.IsEmpty == false)
-            {
-                return false;
-            }
-
-            return true;
         }
     }
 }
+
 public abstract class BuilingBase : MonoBehaviour
 { }
