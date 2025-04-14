@@ -4,7 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(SphereCollider))]
 public class Detector : MonoBehaviour
 {
-    private List<IEffectRecepient> _enemiesInRange = new();
+    private readonly List<IEffectRecepient> _enemiesInRange = new();
 
     private void OnTriggerEnter(Collider other)
     {

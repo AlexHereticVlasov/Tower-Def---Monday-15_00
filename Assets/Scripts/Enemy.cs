@@ -56,7 +56,7 @@ public class Enemy : MonoBehaviour, ISelectable, IEffectRecepient
         Destroy(gameObject);
     }
 
-    public void TakeDamage(float damage) => _stats.TakeDamage(damage);
+    public void TakeDamage(Damage damage) => _stats.TakeDamage(damage);
 
     public void HandleReachTarget()
     {
@@ -107,7 +107,7 @@ public interface IDamageable
     public event UnityAction<Enemy> Died;
     public event UnityAction<Enemy> ReachedTarget;
 
-    void TakeDamage(float damage);
+    void TakeDamage(Damage damage);
 }
 
 public interface IEffectRecepient : IDamageable
@@ -164,6 +164,7 @@ public class DamageOverTimeEffect : Effect
     private readonly float _damagePerSecond;
     private readonly float _tickInterval = 0.2f;
     private float _timeSinceLastTick;
+    protected DamageTypes Type;
 
     public DamageOverTimeEffect(float duration, float damagePerSecond,
         bool isStackable = false, float tickInterval = 0.2f )
@@ -180,7 +181,7 @@ public class DamageOverTimeEffect : Effect
 
         if (_timeSinceLastTick >= _tickInterval)
         {
-            Target.TakeDamage(_damagePerSecond * _tickInterval);
+            Target.TakeDamage(new Damage(_damagePerSecond * _tickInterval, Type, null));
             _timeSinceLastTick = 0;
         }
     }

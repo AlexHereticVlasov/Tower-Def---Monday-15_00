@@ -30,13 +30,13 @@ public class Stats : MonoBehaviour, IStatsReadOnly
 
     public float GetNormilizeHealth() => _value / _max;
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(Damage damage)
     {
-        _value -= damage;
+        _value -=  Mathf.Clamp(damage.Value - _actualArmor, 1, float.MaxValue);
         ValueChanged?.Invoke(this);
         if (_value <= 0)
         {
-            Die();
+            Die(damage.DamageDeller);
         }
 
     }
@@ -64,8 +64,9 @@ public class Stats : MonoBehaviour, IStatsReadOnly
 
     }
 
-    private void Die()
+    private void Die(IDamageDeller deller)
     {
+        deller.AddExperience(10);
         Died?.Invoke(this);
     }
 

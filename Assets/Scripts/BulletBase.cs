@@ -4,17 +4,19 @@ public abstract class BulletBase : MonoBehaviour
 {
     [SerializeField] private float _speed = 5;
     [field: SerializeField] public float Damage { get; private set; } =  5;
+    
+    public IDamageDeller Deller { get; private set; }
 
     private Transform _enemy;
 
-    public void Init(Transform enemy)
+    public void Init(Transform enemy, IDamageDeller deller)
     {
         _enemy = enemy;
+        Deller = deller;
     }
 
     private void Update()
     {
-        Debug.Log($"{_enemy.ToString()} {_enemy == null}");
         if (_enemy == null)
         {
             Destroy(gameObject);

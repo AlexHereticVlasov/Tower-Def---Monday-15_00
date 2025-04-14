@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public class Weapon : MonoBehaviour, IDamageDeller
 {
     [SerializeField] private Detector _detector;
     [SerializeField] private BulletBase _bullet;
@@ -37,9 +37,14 @@ public class Weapon : MonoBehaviour
         if (_detector.TryGetEnemy(out IEffectRecepient enemy))
         {
             var bullet = Instantiate(_bullet, transform.position, Quaternion.identity);
-            bullet.Init(enemy.Transform);
+            bullet.Init(enemy.Transform, this);
             _time = _rate;
         }
+    }
+
+    public void AddExperience(float amount)
+    {
+        
     }
 }
 
@@ -47,11 +52,13 @@ public struct Damage
 {
     public readonly float Value;
     public readonly DamageTypes Type;
+    public readonly IDamageDeller DamageDeller;
 
-    public Damage(float value, DamageTypes type)
+    public Damage(float value, DamageTypes type, IDamageDeller deller)
     {
         Value = value;
         Type = type;
+        DamageDeller = deller;
     }
 }
 
@@ -62,4 +69,9 @@ public enum DamageTypes
     Frost = 2,
     Lighting = 3,
     Poison = 4
+}
+
+public interface IDamageDeller
+{
+    void AddExperience(float amount);
 }

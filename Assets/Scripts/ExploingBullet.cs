@@ -14,7 +14,7 @@ public sealed class ExploingBullet : BulletBase
             if (unit.TryGetComponent(out IEffectRecepient enemy1))
             {
                 //ToDo: Calculate damage from distance to target
-                enemy1.TakeDamage(Damage);
+                enemy1.TakeDamage(new Damage(Damage, DamageTypes.Fire, Deller));
             }
         }
     }
