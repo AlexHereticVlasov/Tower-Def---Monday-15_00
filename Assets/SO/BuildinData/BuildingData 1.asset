@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d876cf9ab79e574c93fedb332f33dc3, type: 3}
   m_Name: BuildingData 1
   m_EditorClassIdentifier: 
-  <Template>k__BackingField: {fileID: 2358980800148869345, guid: 35ecfb11831863347972cadb3d759739, type: 3}
+  <Template>k__BackingField: {fileID: 2358980800148869345, guid: 804ccf0937efa0347990b2c15255da0c, type: 3}
+  <Icon>k__BackingField: {fileID: 0}
   <Cost>k__BackingField: 50

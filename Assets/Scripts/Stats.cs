@@ -32,7 +32,7 @@ public class Stats : MonoBehaviour, IStatsReadOnly
 
     public void TakeDamage(Damage damage)
     {
-        _value -=  Mathf.Clamp(damage.Value - _actualArmor, 1, float.MaxValue);
+        _value -=  Mathf.Clamp(damage.Value - _actualArmor, 0, float.MaxValue);
         ValueChanged?.Invoke(this);
         if (_value <= 0)
         {

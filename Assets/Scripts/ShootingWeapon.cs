@@ -1,11 +1,21 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour, IDamageDeller
+public abstract class BaseWeapon : MonoBehaviour, IDamageDeller
 {
-    [SerializeField] private Detector _detector;
+    [field: SerializeField] public Detector Detector { get; private set; }
+
+    protected abstract void Attack();
+
+    public void AddExperience(float amount)
+    {
+
+    }
+}
+
+public sealed class ShootingWeapon : BaseWeapon
+{
+    
     [SerializeField] private BulletBase _bullet;
 
     [SerializeField] private float _rate;
@@ -19,7 +29,7 @@ public class Weapon : MonoBehaviour, IDamageDeller
 
         if (_time <= 0)
         {
-            Shoot();
+            Attack();
         }
     }
 
@@ -32,9 +42,9 @@ public class Weapon : MonoBehaviour, IDamageDeller
         }
     }
 
-    private void Shoot()
+    protected override void Attack()
     {
-        if (_detector.TryGetEnemy(out IEffectRecepient enemy))
+        if (Detector.TryGetEnemy(out IEffectRecepient enemy))
         {
             var bullet = Instantiate(_bullet, transform.position, Quaternion.identity);
             bullet.Init(enemy.Transform, this);
@@ -42,9 +52,22 @@ public class Weapon : MonoBehaviour, IDamageDeller
         }
     }
 
-    public void AddExperience(float amount)
+    
+}
+
+public sealed class MagicWeapon : BaseWeapon
+{
+    protected override void Attack()
     {
-        
+        if (Detector.TryGetEnemies(out IReadOnlyList<IEffectRecepient> targets))
+        {
+            foreach (var target in targets)
+            {
+                var damage = new Damage(1, DamageTypes.Fire, this);
+                target.TakeDamage(damage);
+                //ToDO: Reset Rate
+            }
+        }
     }
 }
 

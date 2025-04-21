@@ -39,6 +39,12 @@ public class Detector : MonoBehaviour
         return enemy != null;
     }
 
+    public bool TryGetEnemies(out IReadOnlyList<IEffectRecepient> enemies)
+    {
+        enemies = _enemiesInRange;
+        return _enemiesInRange.Count > 0;
+    }
+
     private IEffectRecepient GetEnemy()
     {
         if (_enemiesInRange.Count == 0)
