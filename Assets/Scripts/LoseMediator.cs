@@ -37,3 +37,16 @@ public sealed class LoseMediator : MonoBehaviour
         //ToDo: Show Lose panel
     }
 }
+
+
+namespace Speed
+{
+}
+
+namespace UI
+{
+    public sealed class GameSpeedViev : MonoBehaviour
+    { 
+    
+    }
+}

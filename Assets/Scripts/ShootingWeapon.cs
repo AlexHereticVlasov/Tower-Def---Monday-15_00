@@ -98,3 +98,4 @@ public interface IDamageDeller
 {
     void AddExperience(float amount);
 }
+
